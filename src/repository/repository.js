@@ -20,7 +20,7 @@ module.exports = class Repository {
     }
     async list(){
         try {
-            const result = await connectionPostgreSQL().select().from(tableName).whereRaw('description ilike ?', '%lenovo%');
+            const result = await connectionPostgreSQL().select().from(tableName).whereRaw('description ilike ?', '%lenovo%').orderBy('amount', 'desc');
             return result;
         } catch (error) {
             console.log(error);
