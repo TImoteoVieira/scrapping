@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  scrap_app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:3001:3001"
+    env_file:
+     - .env
+    environment:
+      NODE_ENV: 'production'
+    restart: always
+    depends_on:
+      - scrapping_db
+
+  scrapping_db:
+    image: postgres:12
+    container_name: scrapping_db
+    ports:
+      - "5421:5432"
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      TZ: "America/Fortaleza"
