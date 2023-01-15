@@ -4,7 +4,7 @@ exports.up = async function(knex) {
     await knex.schema.createTable(tableName, function(table){
     table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
     table.string('title'),
-    table.string('amount'),
+    table.float('amount'),
     table.text('description'),
     table.string('data_rating'),
     table.string('pull_right'),
