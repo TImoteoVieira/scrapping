@@ -15,10 +15,10 @@ async function scrap(){
         const options = await page.$$eval('.thumbnail', (options) => 
             options.map((option) => ({
                 title: option.querySelector('.title').innerText.trim(),
-                amount: option.querySelector('h4.pull-right.price').innerText.trim(), 
+                amount: option.querySelector('h4.pull-right.price').innerText.trim().replace(/[^0-9]/g, ''), 
                 description: option.querySelector('p.description').innerText.trim(),
                 data_rating: option.querySelector('p[data-rating]').getAttribute('data-rating'),
-                pull_right: option.querySelector('.pull-right').innerText.trim()
+                pull_right: option.querySelector('p.pull-right').innerText.trim()
             })))
         return options;
     } catch (error) {
